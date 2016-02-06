@@ -1,0 +1,18 @@
+nginx:
+ image: aportnov77/magento-nginx
+ ports: 
+  - "80:80"
+ volumes:
+  - /home/andrey/work/web/composetest/php:/usr/share/nginx/html
+ links:
+  - mysql
+  - php
+mysql:
+ image: aportnov77/magento-mysql
+ environment:
+  - MYSQL_ROOT_PASSWORD=123qwe
+  - MYSQL_DATABASE=magento
+  - MYSQL_USER=andrey
+  - MYSQL_PASSWORD=123qwe
+php:
+ image: aportnov77/magento-php

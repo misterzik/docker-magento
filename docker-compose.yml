@@ -1,18 +1,27 @@
 nginx:
- image: aportnov77/magento-nginx
+ build: ./nginx
+# image: aportnov77/magento-nginx
  ports: 
   - "80:80"
  volumes:
   - /home/andrey/work/web/composetest/php:/usr/share/nginx/html
- links:
-  - mysql
-  - php
+ net: "host"
 mysql:
- image: aportnov77/magento-mysql
+ build: ./mysql
+ ports:
+  - "3306"
+# image: aportnov77/magento-mysql
  environment:
   - MYSQL_ROOT_PASSWORD=123qwe
   - MYSQL_DATABASE=magento
   - MYSQL_USER=andrey
   - MYSQL_PASSWORD=123qwe
+ net: "host"
 php:
- image: aportnov77/magento-php
+ build: ./php
+# image: aportnov77/magento-php
+ ports:
+  - "9000"
+ volumes:
+  - /home/andrey/work/web/composetest/php:/usr/share/nginx/html
+ net: "host"
